@@ -34,7 +34,7 @@ final float GROUNDHOG_INIT_X = OFFSET_X*4;
 final float GROUNDHOG_INIT_Y = OFFSET_Y;
 final float GROUNDHOG_W = 80;
 final float GROUNDHOG_H = 80;
-final float GROUNDHOG_SPEED = (80/15);
+final float GROUNDHOG_SPEED = round(80/15);
 
 PImage bg, soil, life, soldier, cabbage;
 PImage groundhogIdle, groundhogDown, groundhogLeft, groundhogRight;
