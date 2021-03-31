@@ -48,11 +48,12 @@ float soldierX, soldierY;
 
 float groundhogX = OFFSET_X*4;
 float groundhogY = OFFSET_Y;
+float count = 0;
 
 float lifeInitial = 80;
-float y = 0;
-float count = 0;
-boolean down, left, right = false;
+
+boolean downPressed, leftPressed, rightPressed = false;
+
 void setup() {
   size(640, 480, P2D);
   
@@ -152,7 +153,7 @@ void draw() {
                 }
                 image(groundhogDown, groundhogX, groundhogY);
               }else{
-                if(down){
+                if(downPressed){
                   count = 0;
                   image(groundhogLeft, groundhogX, groundhogY);
                   bottonState = BOTTON_DOWN;
@@ -172,7 +173,7 @@ void draw() {
               }
               image(groundhogLeft, groundhogX, groundhogY);
             }else{
-              if(left){
+              if(leftPressed){
                   count = 0;
                   image(groundhogLeft, groundhogX, groundhogY);
                   bottonState = BOTTON_LEFT;
@@ -192,7 +193,7 @@ void draw() {
               }
               image(groundhogRight, groundhogX, groundhogY);
             }else{
-              if(right){
+              if(rightPressed){
                   count = 0;
                   image(groundhogRight, groundhogX, groundhogY);
                   bottonState = BOTTON_RIGHT;
@@ -256,18 +257,17 @@ void keyPressed(){
     if(bottonState == BOTTON_NORMAL){  
       switch(keyCode){
         case DOWN:
-            bottonState = BOTTON_DOWN;
-            down = true;
+          bottonState = BOTTON_DOWN;
+          downPressed = true;
           break;
         case LEFT:
-            bottonState = BOTTON_LEFT;
-            left = true;
+          bottonState = BOTTON_LEFT;
+          leftPressed = true;
           break;
         case RIGHT:
-            bottonState = BOTTON_RIGHT;
-            right = true;
+          bottonState = BOTTON_RIGHT;
+          rightPressed = true;
           break;   
-        
       }
     }    
   }     
@@ -275,18 +275,16 @@ void keyPressed(){
 
 void keyReleased(){
   if(key == CODED){
-    //if(bottonState == BOTTON_NORMAL){  
       switch(keyCode){
         case DOWN:
-            down = false;
+          downPressed = false;
           break;
         case LEFT:
-            left = false;
+          leftPressed = false;
           break;
         case RIGHT:
-          right = false;
-        break; 
+          rightPressed = false;
+          break; 
       }
-    //}    
   }
 }
