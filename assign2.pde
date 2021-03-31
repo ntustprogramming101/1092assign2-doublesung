@@ -52,7 +52,7 @@ float groundhogY = OFFSET_Y;
 float lifeInitial = 80;
 float y = 0;
 float count = 0;
-
+boolean down, left, right = false;
 void setup() {
   size(640, 480, P2D);
   
@@ -139,48 +139,67 @@ void draw() {
       }else{
         switch(bottonState){
           case BOTTON_NORMAL:
+            count = 0;
             image(groundhogIdle, groundhogX, groundhogY);
             break;
           case BOTTON_DOWN:
               if(count < OFFSET_Y){
                 count += GROUNDHOG_SPEED;
                 groundhogY += GROUNDHOG_SPEED;
+                // border range
                 if(groundhogY + GROUNDHOG_H > height){
                   groundhogY = height - GROUNDHOG_H;
                 }
                 image(groundhogDown, groundhogX, groundhogY);
               }else{
-                image(groundhogIdle, groundhogX, groundhogY);
-                count = 0;
-                bottonState = BOTTON_NORMAL;
+                if(down){
+                  count = 0;
+                  image(groundhogLeft, groundhogX, groundhogY);
+                  bottonState = BOTTON_DOWN;
+                }else{
+                  image(groundhogIdle, groundhogX, groundhogY);
+                  bottonState = BOTTON_NORMAL;
+                }
               }
             break;
           case BOTTON_LEFT:
             if(count < OFFSET_X){
               count += GROUNDHOG_SPEED;
               groundhogX -= GROUNDHOG_SPEED;
+              // border range
               if(groundhogX < 0){
                 groundhogX = 0;
               }
               image(groundhogLeft, groundhogX, groundhogY);
             }else{
-              image(groundhogIdle, groundhogX, groundhogY);
-              bottonState = BOTTON_NORMAL;
-              count = 0;
+              if(left){
+                  count = 0;
+                  image(groundhogLeft, groundhogX, groundhogY);
+                  bottonState = BOTTON_LEFT;
+                }else{
+                  image(groundhogIdle, groundhogX, groundhogY);
+                  bottonState = BOTTON_NORMAL;
+                }
             }
             break;
           case BOTTON_RIGHT:
             if(count < OFFSET_X){
               count += GROUNDHOG_SPEED;
               groundhogX += GROUNDHOG_SPEED;
+              // border range
               if(groundhogX + GROUNDHOG_W > width){
                 groundhogX = width - GROUNDHOG_W;
               }
               image(groundhogRight, groundhogX, groundhogY);
             }else{
-              image(groundhogIdle, groundhogX, groundhogY);
-              bottonState = BOTTON_NORMAL;
-              count = 0;
+              if(right){
+                  count = 0;
+                  image(groundhogRight, groundhogX, groundhogY);
+                  bottonState = BOTTON_RIGHT;
+                }else{
+                  image(groundhogIdle, groundhogX, groundhogY);
+                  bottonState = BOTTON_NORMAL;
+                }
             }
             break; 
          }  
@@ -238,14 +257,36 @@ void keyPressed(){
       switch(keyCode){
         case DOWN:
             bottonState = BOTTON_DOWN;
-          break;
-        case RIGHT:
-            bottonState = BOTTON_RIGHT;
+            down = true;
           break;
         case LEFT:
             bottonState = BOTTON_LEFT;
+            left = true;
           break;
+        case RIGHT:
+            bottonState = BOTTON_RIGHT;
+            right = true;
+          break;   
+        
       }
     }    
   }     
+}
+
+void keyReleased(){
+  if(key == CODED){
+    //if(bottonState == BOTTON_NORMAL){  
+      switch(keyCode){
+        case DOWN:
+            down = false;
+          break;
+        case LEFT:
+            left = false;
+          break;
+        case RIGHT:
+          right = false;
+        break; 
+      }
+    //}    
+  }
 }
