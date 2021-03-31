@@ -155,7 +155,7 @@ void draw() {
               }else{
                 if(downPressed){
                   count = 0;
-                  image(groundhogLeft, groundhogX, groundhogY);
+                  image(groundhogDown, groundhogX, groundhogY);
                   bottonState = BOTTON_DOWN;
                 }else{
                   image(groundhogIdle, groundhogX, groundhogY);
@@ -231,8 +231,6 @@ void draw() {
         image(restartHovered, BUTTON_LEFT, BUTTON_TOP);
         if(mousePressed){
           // reset
-          bottonState = BOTTON_NORMAL;
-          
           groundhogX = GROUNDHOG_INIT_X;
           groundhogY = GROUNDHOG_INIT_Y;
           
@@ -254,7 +252,8 @@ void draw() {
 
 void keyPressed(){
   if(key == CODED){
-    if(bottonState == BOTTON_NORMAL){  
+    if(bottonState == BOTTON_NORMAL
+    && gameState == GAME_RUN){  
       switch(keyCode){
         case DOWN:
           bottonState = BOTTON_DOWN;
