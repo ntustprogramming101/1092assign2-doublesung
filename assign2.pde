@@ -79,7 +79,7 @@ void setup() {
   soldierX = -80;
   soldierY = (OFFSET_Y*2 + floor(random(4)) * OFFSET_Y);
   
-  cabbageX = floor(random(0,7)) * OFFSET_X;
+  cabbageX = floor(random(8)) * OFFSET_X;
   cabbageY = OFFSET_Y*2 + floor(random(4)) * OFFSET_Y;
 }
 
@@ -236,7 +236,7 @@ void draw() {
           
           soldierY = (OFFSET_Y*2 + floor(random(4)) * OFFSET_Y);
           
-          cabbageX = floor(random(0,7)) * OFFSET_X;
+          cabbageX = floor(random(8)) * OFFSET_X;
           cabbageY = OFFSET_Y*2 + floor(random(4)) * OFFSET_Y;
           
           lifeInitial = 80;
